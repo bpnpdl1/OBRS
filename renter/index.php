@@ -31,8 +31,9 @@ if(hasSuccess()){
 <div style="padding-left: 25px;">
   <div class="row d-flex justify-content-center align-items-center">
     <?php
-
-    $bikes = where('bikes', 'approve', '=', 'approved');
+$bsql="SELECT*FROM bikes WHERE approve='approved' AND status=0";
+$bikes=query($bsql);
+    // $bikes = where('bikes', 'approve', '=', 'approved');
 
     // foreach ($bikes as $bike)
     for ($i = count($bikes) - 1; $i > count($bikes) - 5; $i--) {

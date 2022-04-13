@@ -14,7 +14,7 @@ $categorysql=" AND category_id=". $_POST['type_id'];
 else{
   $categorysql="";
 }
-$sql="SELECT * FROM bikes WHERE city_id=".$_POST['city_id'].$categorysql;
+$sql="SELECT * FROM bikes WHERE status=0 AND city_id=".$_POST['city_id'].$categorysql;
 
     $bikes = query($sql);
 
