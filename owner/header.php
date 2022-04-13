@@ -31,6 +31,9 @@ $countnoti = query($sql);
         body {
             width: 100%;
         }
+        .controlsbike>a{
+            margin: 10px;
+        }
 
         :root {
             --first: rgba(23, 22, 22, 0.95);

@@ -56,7 +56,13 @@ foreach($bikes as $bike){
 </table>
 </div>
         
+<script>
 
+  <?php if(hasSuccess()){?>
+alert('<?php echo getSuccess();?>')
+
+  <?php }?>
+</script>
 
 
 
