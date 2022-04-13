@@ -49,7 +49,7 @@ foreach($bikes as $bike){
       <th scope="row"><?php echo $sn++;?></th>
       <td><?php echo $bike['name'];?></td>
       <td><?php echo $bike['number_plate'];?></td>
-      <td><a href="">See more</a></td>
+      <td><a href="bikeprofile.php?id=<?php echo $bike['id'];?>">See more</a></td>
     </tr>
     <?php }?>
   </tbody>

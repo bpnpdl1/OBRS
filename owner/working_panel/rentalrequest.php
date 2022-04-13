@@ -11,6 +11,13 @@ $sn = 1;
 $Sql = 'SELECT * FROM `rent` WHERE `owner_id`=' . $owner_id . ' AND `status`=1';
 $rents = query($Sql);
 
+if (isset($_POST['btnsearch'])) {
+    $ticket = $_POST['ticket'];
+
+    $rsql = "SELECT*FROM `rent` WHERE ticket='$ticket'";
+    $rents = query($rsql);
+    
+}
 
 
 
@@ -22,10 +29,15 @@ require_once '../header.php';
     <div class="mx-3 d-flex justify-content-between">
         <h3>Rent Request</h3>
         <div class="form-group d-flex justify-content-end w-9">
-            <input type="text" name="ticket" placeholder="Search Ticket" class="form-control">
+            <form action="rentalrequest.php" method="POST" class="d-flex mx-4">
 
+                <input type="text" name="ticket" placeholder="Search Ticket" class="form-control">
+                <input type="submit" value="Search" class="btn btn-dark" name="btnsearch">
+
+            </form>
+            <a href="http://localhost/Online_Bike_Rental_System/owner/working_panel" class="btn btn-dark">Go back</a>
         </div>
-        <a href="http://localhost/Online_Bike_Rental_System/owner/working_panel">Go back</a>
+
 
     </div>
 
