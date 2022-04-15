@@ -40,7 +40,7 @@ $category = find('categories', $bike['category_id']);
             <a href="approve.php?id=<?php echo $id; ?>">Approve Request</a>
         <?php } ?>
         <a href="edit.php?id=<?php echo $id; ?>" class="mx-3">Edit</a>
-        <a href="delete.php?id=<?php echo $id; ?>" class="mx-3" onclick="confirmDelete(<?php echo $id; ?>)">Delete</a>
+        <a  class="mx-3" onclick="confirmDelete(<?php echo $id; ?>)">Delete</a>
         <a href="index.php" class="mx-3">Go back</a>
 
     </div>

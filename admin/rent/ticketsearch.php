@@ -20,6 +20,7 @@ if (empty($rent)) {
     echo 'Rental Request Not Found';
     die;
 }
+
 $bike = find('bikes', $rent['bike_id']);
 $city = find('cities', $bike['city_id']);
 $renter = find('users', $rent['renter_id']);
@@ -55,7 +56,9 @@ if($rent['status']==1){
         <p>Renter Name : <?php echo $renter['name']; ?></p>
         <p>From Date : <?php echo $rent['from_date']; ?></p>
         <p>To Date : <?php echo $rent['to_date']; ?></p>
-        <p>Owner Name : <?php echo $owner['name']; ?></p>
+        <p>Owner Name : <?php if(!empty($owner)){
+            echo $owner['name'];
+        } ?></p>
         <p>Available At : <?php echo $city['name']; ?></p>
         <p>Status : <?php echo $status; ?></p>
     </div>

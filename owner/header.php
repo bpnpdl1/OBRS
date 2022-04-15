@@ -95,7 +95,7 @@ $countnoti = query($sql);
                                     <?php echo $fname; ?>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li> <a class="dropdown-item" style="color: #000000;" href="http://localhost/Online_Bike_Rental_System/renter/profile.php" class="px-4"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+                                    <li> <a class="dropdown-item" style="color: #000000;" href="http://localhost/Online_Bike_Rental_System/owner/profile.php" class="px-4"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
                                     <a class="dropdown-item" style="color: #000000;" href="http://localhost/Online_Bike_Rental_System/signout.php" class="px-4"> <i class="fa fa-sign-out"></i> Logout</a>
 
                                 </ul>

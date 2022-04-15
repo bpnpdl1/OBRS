@@ -35,3 +35,4 @@ switch ($type) {
 
 $file_name = uniqid() . $ext;
 move_uploaded_file($file, "./uploads/$file_name");
+$personal_image=$file_name;

@@ -7,15 +7,31 @@ $renters = find('users', $id);
 
 
 
+
 ?>
-<img src="../uploads/<?php echo $renters['personal_image']; ?>" alt="" title="Image" height="100px">
-<p>Name: <?php echo $renters['name']; ?></p>
-<p>email: <?php echo $renters['email']; ?></p>
-<p>address: <?php echo $renters['address']; ?></p>
-<p>dob: <?php echo $renters['dob']; ?></p>
-<p>License number: <?php echo $renters['license_number']; ?></p>
-<p>Citizenship Number: <?php echo $renters['citizenship_number']; ?></p>
-<p>role: <?php echo $renters['role']; ?></p>
+<div class="m-4 d-flex justify-content-between" >
+    <h2>User Details</h2>
+    <div class="d-flex">
+    <a href="edit.php?id=<?php echo $id; ?>" class="mx-4">Edit</a>
+    <a href="index.php?id=<?php echo $id; ?>" class="mx-4">Delete</a>
+    </div>
+</div>
+<div style="display: flex;" class="m-4 p-4">
+<div style="width: 50%;">
+    <p>Name: <?php echo $renters['name']; ?></p>
+    <p>email: <?php echo $renters['email']; ?></p>
+    <p>address: <?php echo $renters['address']; ?></p>
+    <p>dob: <?php echo $renters['dob']; ?></p>
+    <p>License number: <?php echo $renters['license_number']; ?></p>
+    <p>Citizenship Number: <?php echo $renters['citizenship_number']; ?></p>
+    <p>role: <?php echo $renters['role']; ?></p>
+</div>
+<div>
+    
+<img src="../uploads/<?php echo $renters['personal_image']; ?>" alt="" title="Image" height="300px">
+
+</div>
+</div>
 
 
 <?php require 'footer.php'; ?>

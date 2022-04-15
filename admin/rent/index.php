@@ -9,7 +9,8 @@ require_once '../header.php';
 
 <div class="m-5 d-flex justify-content-between">
     <h2>Rent Request</h2>
-    <div><a href="Add.php">Check Pending Requests</a></div>
+    <div><a href="Add.php">Check Pending Requests</a>
+<a href="" class="mx-4">Register a Rent</a></div>
 </div>
 <div class="form mx-5">
     <form action="ticketsearch.php" method="POST">
@@ -24,18 +25,27 @@ require_once '../header.php';
         <tr>
             <th scope="col">S\N</th>
             <th scope="col">Renter Name</th>
+            <th scope="col">Rental Status</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
         <?php
         $sn = 1;
-        $rents = all('rent');
+        $rents = query('SELECT*FROM rent ORDER BY status');
 
 
         foreach ($rents as $rent) {
 
-
+            if($rent['status']==0){
+                $status='Not Approved';
+            }
+            if($rent['status']==1){
+                $status='Approved';
+            }
+            if($rent['status']==2){
+                $status='Rent close';
+            }
             $renter = find('users', $rent['renter_id']);
 
             if (!empty($renter)) {
@@ -44,8 +54,9 @@ require_once '../header.php';
                     <td><?php echo $sn++ ?></td>
 
                     <td><?php echo $renter['name']; ?></td>
+                    <td><?php echo $status; ?></td>
                     <td>
-                        <a href="show.php?id=<?php echo $rent['id']; ?>">See Details</a>
+                        <a href="ticketsearch.php?ticket=<?php echo $rent['ticket']; ?>">See Details</a>
                     </td>
                 </tr>
 

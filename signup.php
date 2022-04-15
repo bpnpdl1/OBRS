@@ -85,7 +85,7 @@ $license_number = $form['license_number'];
 <br>
 <div class="d-flex justify-content-center">
 
-  <form class="w-50 signup" id="signupform" action="signup.php" method="POST" enctype="multipart/form-data">
+  <form class="w-50 signup " id="signupform" action="signup.php" method="POST" enctype="multipart/form-data">
     <fieldset class="justify-content-md-center border-1 shadow rounded p-3 bg-light">
       <legend class="bg-dark text-light text-center font-weight-bold rounded p-3">
         <b> SIGN UP</b>
