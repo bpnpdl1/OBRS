@@ -41,7 +41,7 @@ $status='Not approved ';
 if($rent['status']==1){
     $status='Approved ';
 }
-
+   
 
 ?>
 
@@ -64,8 +64,7 @@ if($rent['status']==1){
     </div>
     <div class="col">
         <div class="buttons">
-            <a href="approveticket.php?ticket=<?php echo $ticket;?>" class="mx-2">Approve</a>
-            <a href="Reject" class="mx-2">Reject</a>
+           
             <a href="" class="mx-2">Go Back</a>
         </div>
         <div class="p-5">

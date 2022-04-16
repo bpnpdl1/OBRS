@@ -10,6 +10,14 @@ if(!preg_match("/^[a-zA-Z\s]+$/",$name)){
     setError("Do not enter numeric and Special Characters in the name field");
     redirect('signup.php');
 }
+if(!preg_match("/[0-9]{2}-[0-9]{2}-[0-9]{8}/",$license_number)){
+
+    setError('license number format is invalid');
+    redirect('signup.php');
+}
+
+
+
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     setError("Please provide an valid email!");

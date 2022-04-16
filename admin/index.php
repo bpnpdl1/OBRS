@@ -3,40 +3,16 @@ require 'db.php';
 require_once './functions.php';
 $title = "Admin panel";
 require 'top.php';
+$data = all('users');
 
-if (!empty($_POST)) {
-    $search = request('search');
-    $value = request('value');
-    switch ($search) {
-        case 'name': {
-                $data = where('users', 'name', '=', $value);
-                break;
-            }
-        case 'email': {
-                $data = where('users', 'email', '=', $value);
-                break;
-            }
-        case 'citizenship_number': {
-                $data = where('users', 'citizenship_number', '=', $value);
-                break;
-            }
-        case 'license_number': {
-                $data = where('users', 'license_number', '=', $value);
-                break;
-            }
-        case 'role': {
-                $data = where('users', 'role', '=', $value);
-                break;
-            }
-        case 'displayall': {
-                $data = all('users');
-                break;
-            }
-        default:
-            setError('No data found');
+if(!empty($_POST)){
+    $txtsearch=request('txtsearch');
+    $data=query("SELECT*FROM users WHERE name LIKE '%$txtsearch%' OR role LIKE'%$txtsearch%'");
+    $arr=str_split($txtsearch);
+    if(count($arr)<3){
+    $data=array();
     }
 }
-
 
 require 'header.php';
 
@@ -54,6 +30,8 @@ $owner = count($owner);
 
 $bikes = all('bikes');
 $bikes = count($bikes);
+
+
 ?>
 
 <div class="row m-4">
@@ -70,38 +48,29 @@ $bikes = count($bikes);
         <h3 class="rounded p-3" style="background:#000000;text-align:center;color:aliceblue;">Bikes</h3>
         <p style="font-size:44px;text-align:center;"><?php echo $bikes; ?></p>
     </div>
-    <div class="col border rounded mx-4 ">
-        <h5 class="rounded p-3" style="background:#000000;text-align:center;color:aliceblue;">Users Search By</h5>
-        <form action="index.php" method="POST">
 
-            <select name="search" id="search" class="form-control">
-                <option value="">Not Choosen</option>
-                <option value="email">Email</option>
-                <option value="name">Name</option>
-                <option value="citizenship_number">Citizenship number</option>
-                <option value="license_number">License Number</option>
-                <option value="role">Role</option>
-                <option value="displayall">Display all</option>
-            </select>
-            <input type="text" name="value" class="form-control">
-            <input type="submit" class="btn btn-dark form-control m-2" value="Search">
-
-        </form>
-    </div>
 </div>
+<?php $count = 1; ?>
 <?php if (hasSuccess()) { ?>
     <div class="alert alert-success">
         <?php echo getSuccess(); ?>
     </div>
 <?php } ?>
-<div class="row">
-    <h2 class="ml-5">Clients</h2>
-    <?php $count = 1; ?>
-    <div class="mt-5">
+<div >
+    <div class="d-flex justify-content-between mx-4">
+        <div>
+            <h2>Clients</h2>
+        </div>
 
+        <div>
+           <form action="index.php" method="POST" class="d-flex align-items-center">
+           <input type="text" class="form-control" placeholder="Search Name or Role" name="txtsearch">
+            <input type="submit" value="Search" class="btn btn-dark" >
+           </form>
+        </div>
     </div>
 
-    <table class="table border rounded table-stribed table-hover m-4">
+    <table class="table border rounded table-stribed table-hover m-4" id="usertable">
         <thead style="background-color: #000000; ">
             <tr style="color: #ffffff;">
                 <th scope="col">S\N</th>
@@ -115,36 +84,34 @@ $bikes = count($bikes);
 
 
 
-        <?php if (!empty($_POST)) { ?>
 
 
 
-            <tbody class="tbody">
+
+        <tbody class="tbody">
+            <?php
+            foreach ($data as $users) {
+
+            ?>
+                <tr>
+                    <td><?php echo $count++ ?></td>
+                    <td><?php echo $users['name']; ?></td>
+                    <td><?php echo $users['role']; ?></td>
+                    <td><a href="show.php?id=<?php echo $users['id']; ?>" class="btn btn-success btn-sm ">See details</a>
+                    </td>
+
+
+                </tr>
+                <?php if (hasError()) { ?>
+                    <tr><?php getError(); ?></tr>
                 <?php
-                foreach ($data as $users) {
-
-                ?>
-                    <tr>
-                        <td><?php echo $count++ ?></td>
-                        <td><?php echo $users['name']; ?></td>
-                        <td><?php echo $users['role']; ?></td>
-                        <td><a href="show.php?id=<?php echo $users['id']; ?>" class="btn btn-success btn-sm ">Show</a>
-                            <a href="edit.php?id=<?php echo $users['id']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="index.php?id=<?php echo $users['id']; ?>" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
+                } ?>
+            <?php } ?>
 
 
-                    </tr>
-                    <?php if (hasError()) { ?>
-                        <tr><?php getError(); ?></tr>
-                    <?php
-                    } ?>
-                <?php } ?>
+        </tbody>
 
 
-            </tbody>
-
-        <?php } ?>
     </table>
 
 

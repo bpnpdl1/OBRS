@@ -135,7 +135,7 @@ $license_number = $form['license_number'];
           </div>
           <div class="col">
             <label for="licensenumber">Enter Your License Number</label>
-            <input type="text" name="license_number" class="form-control" id="licensenumber" placeholder=" License Number" value="<?php echo $license_number; ?>">
+            <input type="text" name="license_number" class="form-control" id="licensenumber" placeholder=" License Number" value="<?php echo $license_number; ?>" title="Correct format: xx-xx-xxxxxxxx">
           </div>
         </div>
         <!-- Upload photos -->
