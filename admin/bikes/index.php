@@ -51,7 +51,7 @@ require "../header.php";
   </div>
 
   <table class="table table-hover">
-    <thead>
+    <thead style="background-color: #000000;color:#ffffff">
       <tr>
         <th scope="col">S\N</th>
         <th scope="col">Name</th>

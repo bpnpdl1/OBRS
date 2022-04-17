@@ -3,6 +3,14 @@ require 'db.php';
 require_once './functions.php';
 $title = "Admin panel";
 require 'top.php';
+
+$id = request('id');
+if (!empty($_GET)) {
+   setSuccess('User is Successfully removed');
+    delete('users', $id);
+    redirect('index.php');
+}
+
 $data = all('users');
 
 if(!empty($_POST)){
@@ -18,10 +26,7 @@ require 'header.php';
 
 
 
-$id = request('id');
-if (!empty($_GET)) {
-    delete('users', $id);
-}
+
 $renters = where('users', 'role', '=', 'renter');
 $renterno = count($renters);
 
@@ -97,7 +102,7 @@ $bikes = count($bikes);
                     <td><?php echo $count++ ?></td>
                     <td><?php echo $users['name']; ?></td>
                     <td><?php echo $users['role']; ?></td>
-                    <td><a href="show.php?id=<?php echo $users['id']; ?>" class="btn btn-success btn-sm ">See details</a>
+                    <td><a href="show.php?id=<?php echo $users['id']; ?>" class="btn btn-dark btn-sm ">See details</a>
                     </td>
 
 

@@ -33,11 +33,11 @@ $renters = find('users', $id);
 
 </div>
 </div>
-<?php  setSuccess('User is Successfully removed');?>
+    
 <script>
     function userdelete(){
         if(confirm('Are you sure to delete this User?')){
-          window.location.replace(' index.php?id=<?php echo $id; ?>')
+          location.href=' index.php?id=<?php echo $id; ?>'
 
         }
     }

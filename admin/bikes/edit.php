@@ -5,29 +5,29 @@ require "../top.php";
 require "../header.php";
 
 $id = request('id');
-$_SESSION['id']=$id;
+$_SESSION['id'] = $id;
 $bike = find('bikes', $id);
 
-$categoryb=find('categories',$bike['category_id']);
-$scity=find('cities',$bike['city_id']);
+$categoryb = find('categories', $bike['category_id']);
+$scity = find('cities', $bike['city_id']);
 ?>
 
 
 <div class="row d-flex justify-content-between mx-4">
     <h1>Edit Bike Details </h1>
-    <a href="show.php?id=<?php echo $id;?>">Go back</a>
+    <a href="show.php?id=<?php echo $id; ?>">Go back</a>
 </div>
-<?php if(hasError()){?>
-<div class="alert alert-danger">
-    <p><?php echo getError(); ?></p>
-</div>
-<?php }?>
+<?php if (hasError()) { ?>
+    <div class="alert alert-danger">
+        <p><?php echo getError(); ?></p>
+    </div>
+<?php } ?>
 <div>
-<?php if(hasSuccess()){?>
-<div class="alert alert-success mx-4">
-    <p><?php echo getSuccess(); ?></p>
-</div>
-<?php }?>
+    <?php if (hasSuccess()) { ?>
+        <div class="alert alert-success mx-4">
+            <p><?php echo getSuccess(); ?></p>
+        </div>
+    <?php } ?>
     <form class="form m-3" action="editvaldiation.php" enctype="multipart/form-data" method="post">
         <div class="form-group row">
             <!-- Bike name -->
@@ -48,18 +48,18 @@ $scity=find('cities',$bike['city_id']);
             </div>
             <div class="col">
                 <label for="city" class="form-label">City</label>
-            <select name="city_id" id="city" class="form-control">
-                    <option value="<?php echo $scity['id'];?>"><?php echo $scity['name'];?></option>
+                <select name="city_id" id="city" class="form-control">
+                    <option value="<?php echo $scity['id']; ?>"><?php echo $scity['name']; ?></option>
                     <?php
-                    $cities=all('cities');
-                    foreach($cities as $city){ ?>
-<option value="<?php echo $city['id'];?>"><?php echo $city['name'];?></option>
-                  <?php  } ?>
+                    $cities = all('cities');
+                    foreach ($cities as $city) { ?>
+                        <option value="<?php echo $city['id']; ?>"><?php echo $city['name']; ?></option>
+                    <?php  } ?>
                 </select>
             </div>
             <div class="col">
                 <label for="taxexpirydate" class="form-label">Enter Tax Expiry date</label>
-                <input type="date" id="tax_expiry_date" name="tax_expiry_date" class="form-control" min="<?php echo date('Y-m-d');?>" value="<?php echo $bike['tax_expiry_date']; ?>">
+                <input type="date" id="tax_expiry_date" name="tax_expiry_date" class="form-control" min="<?php echo date('Y-m-d'); ?>" value="<?php echo $bike['tax_expiry_date']; ?>">
             </div>
 
 
@@ -93,7 +93,7 @@ $scity=find('cities',$bike['city_id']);
                 <label for="category" class="form-label">Choose Bike Category</label>
                 <select name="category_id" class="form-control" id="category_id">
                     <?php $bikecategory = find('categories', $bike['category_id']); ?>
-                    <option value="<?php echo $categoryb['id']; ?>"><?php echo $categoryb['name'];?></option>
+                    <option value="<?php echo $categoryb['id']; ?>"><?php echo $categoryb['name']; ?></option>
                     <?php
                     $categories = all('categories');
                     foreach ($categories as $category) { ?>

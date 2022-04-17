@@ -14,7 +14,7 @@ if (empty($ticket)) {
 
 $rent = where('rent', 'ticket', '=', $ticket);
 if(!empty($rent)){
-    $rent = $rent[0];
+    $rent = $rent[0];   
 }
 if (empty($rent)) {
     echo 'Rental Request Not Found';
@@ -41,6 +41,9 @@ $status='Not approved ';
 if($rent['status']==1){
     $status='Approved ';
 }
+if($rent['status']==2){
+    $status='Rent Close';
+}
    
 
 ?>
@@ -52,8 +55,8 @@ if($rent['status']==1){
 <div class="container m-3 row">
     <div class="col">
         <h4>Ticket Code : <?php echo $rent['ticket']; ?></h4>
-        <p>Bike Name : <?php echo $bike['name']; ?></p>
-        <p>Renter Name : <?php echo $renter['name']; ?></p>
+        <p>Bike Name : <a href="http://localhost/Online_Bike_Rental_System/admin/bikes/show.php?id=<?php echo $bike['id'];?>"><?php echo $bike['name']; ?></a></p>
+        <p>Renter Name : <a href="http://localhost/Online_Bike_Rental_System/admin/show.php?id=<?php echo $bike['id'];?>"><?php echo $renter['name']; ?></a></p>
         <p>From Date : <?php echo $rent['from_date']; ?></p>
         <p>To Date : <?php echo $rent['to_date']; ?></p>
         <p>Owner Name : <?php if(!empty($owner)){
@@ -65,7 +68,7 @@ if($rent['status']==1){
     <div class="col">
         <div class="buttons">
            
-            <a href="" class="mx-2">Go Back</a>
+            <a href="http://localhost/Online_Bike_Rental_System/admin/rent" class="mx-2">Go Back</a>
         </div>
         <div class="p-5">
             <img src="../../uploads/<?php echo $images['images'];?>"   style="height: 360px;object-fit: cover;"   alt="" >

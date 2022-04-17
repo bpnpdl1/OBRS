@@ -1,11 +1,11 @@
 <?php
 require 'db.php';
+require_once 'functions.php';
 $title = "Edit Details";
-require 'top.php';
-require 'header.php';
+
 
 $id = request('id');
-// require '../file_handing.php';
+
 $user = find('users', $id);
 
 $name = $user['name'];
@@ -16,6 +16,9 @@ $citizenship_number = $user['citizenship_number'];
 $license_number = $user['license_number'];
 $personal_image = $user['personal_image'];
 
+$redirecturl = 'edit.php?id=' . $id;
+
+
 
 if (!empty($_POST['btnedit'])) {
     $name = $_POST['name'];
@@ -24,11 +27,57 @@ if (!empty($_POST['btnedit'])) {
     $address = $_POST['address'];
     $citizenship_number = $_POST['citizenship_number'];
     $license_number = $_POST['license_number'];
-    $user = update('users', $id, compact('name', 'email', 'dob', 'address', 'citizenship_number', 'license_number'));
-    die("data updated");
+
+    if (empty($name) || empty($email) || empty($dob) || empty($address) || empty($citizenship_number) || empty($license_number)) {
+        setError("Please fill all the fields!");
+        redirect($redirecturl);
+    }
+    if (!preg_match("/^[a-zA-Z\s]+$/", $name)) {
+        setError("Do not enter numeric and Special Characters in the name field");
+        redirect($redirecturl);
+    }
+    if (!preg_match("/[0-9]{2}-[0-9]{2}-[0-9]{8}/", $license_number)) {
+
+        setError('license number format is invalid');
+        redirect($redirecturl);
+    }
+ if(preg_match("/[A-z#$%&*()!%^+]+/",$citizenship_number)){
+    setError('Do not enter alphabetic  or specials  characters in citizenship fields');
+    redirect($redirecturl);
+ }
+    
+   if(dateDiffInDays(date('Y-m-d'),$dob)<18){
+    setError('Your Date is Invalid');
+    redirect($redirecturl);
+   }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        setError("Please provide an valid email!");
+        redirect($redirecturl);
+    }
+    $store_emails = query("SELECT email FROM users WHERE id!=$id AND email='$email'");
+    if (!empty($store_emails)) {
+        setError("$email is already registered");
+        redirect($redirecturl);
+    }
+
+    require_once 'filehandling.php';
+    update('users', $id, compact('name', 'email', 'dob', 'address', 'citizenship_number', 'license_number'));
+
+    setSuccess('Successfully Updated');
+    redirect($redirecturl);
 }
+require 'top.php';
+require 'header.php';
 
 ?>
+<?php if (hasError()) { ?>
+    <div class="alert alert-danger mx-4"><?php echo getError(); ?></div>
+<?php }
+if (hasSuccess()) { ?>
+    <div class="alert alert-success mx-4"><?php echo getSuccess(); ?></div>
+<?php } ?>
+
 
 <form action="edit.php?id=<?php echo $user['id']; ?>" class="form container shadow p-4" style="width: 90%;" method="POST" enctype="multipart/form-data">
     <legend style="background-color: #000000; color:#ffffff;" class="p-2 text-center">Edit <?php echo $name; ?> details.</legend>
