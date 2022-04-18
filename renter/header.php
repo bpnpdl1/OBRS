@@ -4,7 +4,10 @@ check_renter();
 $user = find('users', $_SESSION['user_id']);
 $fullname = explode(" ", $user['name']);
 $fname = $fullname[0];
+$user_id=$user['id'];
+$sql = " SELECT*FROM notifications WHERE renter_id=$user_id AND seen='unseen'";
 
+$countnoti = query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +45,8 @@ $fname = $fullname[0];
             height: 40px;
             border: groove 1px #000000;
         }
-        #bgimagerenter{
+
+        #bgimagerenter {
             background-image: url('http://localhost/Online_Bike_Rental_System/images/c3.jpg');
             background-repeat: no-repeat;
         }
@@ -103,7 +107,7 @@ $fname = $fullname[0];
                         <a class="nav-link" style="color: #ffffff;" href="#"> Rental Procedure</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #ffffff;" href="#"> Notifications</a>
+                        <a class="nav-link" style="color: #ffffff;" href="http://localhost/Online_Bike_Rental_System/renter/notifications.php"> Notifications<sup class="badge badge-light"><?php echo count($countnoti); ?></sup></a>
                     </li>
                     <li class="nav-item d-flex align-items-center">
                         <div class="container mt-1">
@@ -112,13 +116,14 @@ $fname = $fullname[0];
                                     <i class="fa fa-user-circle-o" aria-hidden="true"> </i>
                                     <?php echo $fname; ?>
                                 </button>
-                               <div style="position: absolute;display:flex;justify-content:center;display:none" id="dropdown">
-                               <ul  class="bg-light p-2 px-3" style="list-style: none;">
-                                    <li class="text-center"> <a class="dropdown-item" style="color: #000000;" href="http://localhost/Online_Bike_Rental_System/renter/profile.php" class="px-4"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
-                                    <a class="dropdown-item" style="color: #000000;" href="http://localhost/Online_Bike_Rental_System/signout.php" class="px-4"> <i class="fa fa-sign-out"></i> Logout</a>
+                                <div style="position: absolute;display:flex;justify-content:center;display:none;right:0px;z-index:+1" id="dropdown">
+                                    <ul class="bg-light p-2 px-3" style="list-style: none;">
+                                        <li> <a class="dropdown-item" style="color: #000000;" href="http://localhost/Online_Bike_Rental_System/renter/profile.php" class="px-4"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+                                        <li> <a class="dropdown-item" style="color: #000000;" href="http://localhost/Online_Bike_Rental_System/renter/viewrent.php" class="px-4"><i class="fa fa-eye" aria-hidden="true"></i> View Rented Bike</a></li>
+                                        <li><a class="dropdown-item" style="color: #000000;" href="http://localhost/Online_Bike_Rental_System/signout.php" class="px-4"> <i class="fa fa-sign-out"></i> Logout</a></li>
 
-                                </ul>
-                               </div>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -127,13 +132,13 @@ $fname = $fullname[0];
         </nav>
 
         <script>
-            var dropdown=document.querySelector('#dropdown');
-            function showdropdown(){
-                if(dropdown.style.display=='none'){
-                    dropdown.style.display='block';
-                }
-                else{
-                    dropdown.style.display='none';
+            var dropdown = document.querySelector('#dropdown');
+
+            function showdropdown() {
+                if (dropdown.style.display == 'none') {
+                    dropdown.style.display = 'block';
+                } else {
+                    dropdown.style.display = 'none';
                 }
             }
         </script>

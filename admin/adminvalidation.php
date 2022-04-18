@@ -6,7 +6,7 @@ if (!empty($_POST)) {
     $name = request('name');
     $password = password_hash(request('password'), PASSWORD_DEFAULT);
     $cpassword = request('cpassword');
-    $dob = request('dob');
+    $dob = request('dob');  
     $address = request('address');
     $role = 'admin';
 

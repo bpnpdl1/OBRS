@@ -4,15 +4,16 @@ require_once '../admin/db.php';
 require_once '../admin/functions.php';
 $user_id = $_SESSION['user_id'];
 
-
-if (isset($_POST['btneditprofile'])) {
+$profile=request('profile');
+$password=request('password');
+if (!empty($profile)) {
     $name = request('name');
     $email = request('email');
     $dob = request('dob');
     $address = request('address');
     $citizenship_number = request('citizenship_number');
     $license_number = request('license_number');
-
+echo 'sjsak';
 
     if (!preg_match("/^[a-zA-Z\s]+$/", $name)) {
         setError("Do not enter numeric and Special Characters in the name field");
@@ -30,6 +31,11 @@ if (isset($_POST['btneditprofile'])) {
         setError("This email is already registered!");
         redirect('editprofile.php');
     }
+    if(!preg_match("/[0-9]{2}-[0-9]{2}-[0-9]{2,8}/",$license_number)){
+
+        setError('license number format is invalid');
+        redirect('editprofile.php');
+    }
 
 
     update('users', $user_id, compact('name', 'email', 'dob', 'address', 'citizenship_number', 'license_number'));
@@ -37,7 +43,7 @@ if (isset($_POST['btneditprofile'])) {
     redirect('editprofile.php');
 }
 
-if (isset($_POST['btnchangepassword'])) {
+if (!empty($password)) {
     $old_password = $_POST['old_password'];
     $new_password = $_POST['new_password'];
     $cnew_password = $_POST['cnew_password'];

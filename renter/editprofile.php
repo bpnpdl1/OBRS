@@ -25,7 +25,7 @@ $user = find('users', $_SESSION['user_id']);
     <div class="row">
         <div class="m-4 p-4 shadow rounded col-7">
             <h2 class="text-center">Edit Profile</h2>
-            <form action="editprofilestore.php" method="post">
+            <form action="editprofilestore.php?profile=1" method="POST">
                 <div class="form-group row">
                     <div class="col-6 form-group">
                         <label for="name" class="form-label">Name</label>
@@ -68,7 +68,7 @@ $user = find('users', $_SESSION['user_id']);
         </div>
         <div class="m-4 p-4 shadow rounded col-3">
             <h4 class="text-center">Change Password</h4>
-            <form action="editprofilestore.php" method="POST">
+            <form action="editprofilestore.php?password=1" method="POST">
                 <div class="form-group">
                     <label for="oldpassword" class="form-label">Enter Your Old Password</label>
                     <input type="input" class="form-control" name="old_password">
